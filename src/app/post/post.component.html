@@ -1,0 +1,19 @@
+ <article class="pv4 bt bb b--black-10 ph3 ph0-l">
+    <div>
+      <app-post-title [title]="post.title">
+         {{ post.title }}
+      </app-post-title>
+      <p class="f5 f4-l lh-copy athelas">
+        {{ post.body}}
+      </p>
+    </div>
+    <p class="f6 lh-copy gray mv0">
+      By <span class="ttu">{{ post.author }}</span>
+      <ng-content></ng-content>
+    </p>
+   
+    <app-post-date [date]="post.date">
+    </app-post-date>
+  </article>
+
+
