@@ -7,8 +7,11 @@
   <app-post [post]="post"
     *ngFor="let post of postsService.getFilteredPosts(query);let i = index;">
 
+    <app-author [user]="userService.getUser(post.userId)"></app-author>
+    
     <a [routerLink]="['../post', post.id]" class="link dim blue mr3">Read More</a>
    
+
     <app-like class="f3 green" 
         [count]="post.likeCount" 
         (countChange)="postsService.updateLikeCount(post.id,$event)">

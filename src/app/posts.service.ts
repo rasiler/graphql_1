@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ServerService } from './server.service';
 import { IPost } from './post.type';
+import { Observable } from 'rxjs';
 
 
 const BASE_URL = 'https://jsonplaceholder.typicode.com';
@@ -8,32 +9,7 @@ const BASE_URL = 'https://jsonplaceholder.typicode.com';
 @Injectable()
 export class PostsService {
 
-posts: IPost[]  = [
-  {
-    id: 0,
-    title: 'Post 1 Hang',
-    body: 'hang loose 1',
-    likeCount: 0,
-    date: new Date(),
-    author: 'Rob'
-  },
-    {
-    id: 1,
-    title: 'Post 2 Loose',
-    body: 'hang loose 2',
-    likeCount: 0,
-    date: new Date(),
-    author: 'Rob'
-  },
-    {
-    id: 2,
-    title: 'Post 3 Dude',
-    body: 'hang loose 3',
-    likeCount: 0,
-    date: new Date(),
-    author: 'Rob'
-  },
-];
+posts: IPost[];
 
 constructor(private serverService: ServerService) {}
 
@@ -45,26 +21,43 @@ constructor(private serverService: ServerService) {}
    });
  }
 
- getPosts() {
-   this.serverService.get(`${BASE_URL}/posts`)
-      .map(posts => {
-        return this.normalizePosts(posts);
-      })
+/*  getPosts() {
+     this.serverService.get(`${BASE_URL}/posts`)
+       .map(posts => {
+          return this.normalizePosts(posts);
+        })
       .subscribe((posts: IPost[]) => {
          this.posts = posts;
       });
  }
+ */
+
+getPosts() {
+     this.serverService.get(`${BASE_URL}/posts`)
+      .map(posts => {
+          return this.normalizePosts(posts);
+        })
+      .subscribe((posts: IPost[]) => {
+         this.posts = posts;
+      });
+ }
+
+/* getPostAuthor(post: IPost) {
+   console.log('get author');
+   return this.serverService.get(`${BASE_URL}/users/${post.userId}`)
+                .subscribe((user: IUser) => { post.author = user; });
+}
+*/
 
 normalizePosts(posts) {
   return posts.map(this.normalizePost);
 }
 
 normalizePost(post) {
- return Object.assign({}, post, {
-   likeCount: 0,
-   author: 'Rob Rasile',
-   date: new Date()
- });
+  return Object.assign({}, post, {
+            likeCount: 0,
+            date: new Date()
+          });
 }
 
 updateLikeCount(id, likeCount) {

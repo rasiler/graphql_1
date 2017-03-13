@@ -7,10 +7,8 @@
         {{ post.body}}
       </p>
     </div>
-    <p class="f6 lh-copy gray mv0">
-      By <span class="ttu">{{ post.author }}</span>
-      <ng-content></ng-content>
-    </p>
+
+    <ng-content></ng-content>
    
     <app-post-date [date]="post.date">
     </app-post-date>

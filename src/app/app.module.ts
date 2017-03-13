@@ -10,6 +10,7 @@ import { PostTitleComponent } from './post-title/post-title.component';
 import { PostDateComponent } from './post-date/post-date.component';
 import { PostsListComponent } from './posts-list/posts-list.component';
 import { PostsService } from './posts.service';
+import { UserService } from './user.service';
 import { ServerService } from './server.service';
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import { HomeContainerComponent } from './home-container/home-container.component';
@@ -17,6 +18,7 @@ import { PostContainerComponent } from './post-container/post-container.componen
 import  { RouterModule } from '@angular/router';
 import { routes } from './routes';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { PostAuthorComponent } from './post-author/post-author.component';
 
 const routing = RouterModule.forRoot(routes);
 
@@ -32,7 +34,8 @@ const routing = RouterModule.forRoot(routes);
     SearchbarComponent,
     HomeContainerComponent,
     PostContainerComponent,
-    NavBarComponent
+    NavBarComponent,
+    PostAuthorComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,7 @@ const routing = RouterModule.forRoot(routes);
     HttpModule,
     routing
   ],
-  providers: [PostsService, ServerService],
+  providers: [PostsService, ServerService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
